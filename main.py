@@ -1,32 +1,14 @@
 from film import Film
 from read_write_json import read_json_file, write_json_file
-from path_file import API_KEY, URL_API ,PATH_JSON_FILMS
-# from func_api import 
-import requests
+from path_file import PATH_JSON_FILMS
+from func_api import all_pages_films
 
 
-number_of_pages = requests.get(
-    URL_API,
-    headers={
-        "Content-type": "application/json",
-        "X-API-KEY": API_KEY
-    }
-).json()["pagesCount"]
+number_of_pages = all_pages_films("pagesCount")
 
-# Получаем указаную страницу
-def all_pages_films(pages):
-    return requests.get(
-    URL_API,
-    params={"page": pages},
-    headers={
-        "Content-type": "application/json",
-        "X-API-KEY": API_KEY
-    }
-).json()["films"]
-
-for i in range(1, number_of_pages + 1):
+for number in range(1, number_of_pages + 1):
     data = read_json_file(PATH_JSON_FILMS)
-    data.append(all_pages_films(i))
+    data.append(all_pages_films("films", number))
     write_json_file(PATH_JSON_FILMS, data)
 
 
