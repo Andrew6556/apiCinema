@@ -16,5 +16,4 @@ if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
 film = Film.get_all_films()
 
 for i in film:
-    i.films_by_genre()
-    # print(i)
+    i.movie_title_search("Брат")

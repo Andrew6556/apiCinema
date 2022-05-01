@@ -1,6 +1,6 @@
 from path_file import PATH_JSON_FILMS
 from read_write_json import read_json_file, write_json_file
-
+import re
 class Film:
 
     def get_all_films() -> object:
@@ -23,3 +23,9 @@ class Film:
         if genre in [self.film_hash["genres"][i]["genre"]\
                     for i in range(0 , len(self.film_hash["genres"]))]:
             print(self.film_hash["nameRu"])
+# "year"
+    def movie_title_search(self, name_movie: str):
+        movie_release_dates = {}
+        if name_movie in re.findall(fr'\b{name_movie}\b', self.title):
+            movie_release_dates[self.title] = self.year
+            
