@@ -1,31 +1,23 @@
+from typing import List
 from path_file import PATH_JSON_FILMS
 from read_write_json import read_json_file, write_json_file
-import re
+# import re
+
+
+
 class Film:
 
-    def get_all_films() -> object:
-        list_films = []
-        for list_film_hash in read_json_file(PATH_JSON_FILMS):
-            for hash_films in list_film_hash:
-                film = Film(hash_films)
-                list_films.append(film)
-        return list_films
+    def __init__(self, films: list) -> None:
+        self.films = films
+        # self.sorted_films = sorted_films
 
-    def __init__(self, film_hash):
-        self.film_hash = film_hash
-        self.title = film_hash["nameRu"]
-        self.year = film_hash["year"]
-        
-    def __str__(self):
-        return f"Название: {self.title}\nГод: {self.year}"
 
-    def films_by_genre(self, genre: str):
-        if genre in [self.film_hash["genres"][i]["genre"]\
-                    for i in range(0 , len(self.film_hash["genres"]))]:
-            print(self.film_hash["nameRu"])
-# "year"
-    def movie_title_search(self, name_movie: str):
-        movie_release_dates = {}
-        if name_movie in re.findall(fr'\b{name_movie}\b', self.title):
-            movie_release_dates[self.title] = self.year
-            
+    def films_by_specific_genre(self, genre: str) -> List:
+        films_to_genre: list = []
+        for film_hash in self.films:
+            for films in film_hash:
+                if genre.lower() in [films["genres"][i]["genre"]\
+                    for i in range(0 , len(films["genres"]))]:
+                        films_to_genre.append(films["nameRu"])
+
+        return films_to_genre        

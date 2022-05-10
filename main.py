@@ -7,13 +7,14 @@ import os
 
 
 
-if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
-    for number in range(1, all_pages_films("pagesCount") + 1):
-        data = read_json_file(PATH_JSON_FILMS)
-        data.append(all_pages_films("films", number))
-        write_json_file(PATH_JSON_FILMS, data)
+# if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
+#     for number in range(1, all_pages_films("pagesCount") + 1):
+#         data = read_json_file(PATH_JSON_FILMS)
+#         data.append(all_pages_films("films", number))
+#         write_json_file(PATH_JSON_FILMS, data)
 
-film = Film.get_all_films()
+films = Film(read_json_file(PATH_JSON_FILMS))
 
-for i in film:
-    i.movie_title_search("Брат")
+films.films_by_specific_genre("детектив")
+
+
