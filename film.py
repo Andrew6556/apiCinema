@@ -1,7 +1,5 @@
-from typing import List
-from path_file import PATH_JSON_FILMS
-from read_write_json import read_json_file, write_json_file
-# import re
+from operator import itemgetter
+import re
 
 
 
@@ -12,7 +10,7 @@ class Film:
         # self.sorted_films = sorted_films
 
 
-    def films_by_specific_genre(self, genre: str) -> List:
+    def films_by_specific_genre(self, genre: str) -> list:
         films_to_genre: list = []
         for film_hash in self.films:
             for films in film_hash:
@@ -21,3 +19,17 @@ class Film:
                         films_to_genre.append(films["nameRu"])
 
         return films_to_genre        
+
+    def sorted_output_of_the_requested_movie(self, movie: str) -> list:
+        found_movies = []
+
+        for film_hash in self.films:
+            for film in film_hash:
+                if re.search(fr"\b{movie}\b",
+                    film["nameRu"], flags=re.IGNORECASE):
+                        found_movies.append({
+                            "film":film["nameRu"],
+                            "year":film["year"]
+                        })
+        return sorted(found_movies, key=itemgetter("year"))
+        

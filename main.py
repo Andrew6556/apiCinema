@@ -3,9 +3,6 @@ from path_file import PATH_JSON_FILMS
 from read_write_json import read_json_file, write_json_file
 from func_api import all_pages_films
 
-import os
-
-
 
 # if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
 #     for number in range(1, all_pages_films("pagesCount") + 1):
@@ -14,7 +11,5 @@ import os
 #         write_json_file(PATH_JSON_FILMS, data)
 
 films = Film(read_json_file(PATH_JSON_FILMS))
-
-films.films_by_specific_genre("детектив")
 
 
