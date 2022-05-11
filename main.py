@@ -12,4 +12,4 @@ from func_api import all_pages_films
 
 films = Film(read_json_file(PATH_JSON_FILMS))
 
-
+films.sorted_output_of_the_requested_movie('властелин')
