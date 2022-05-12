@@ -33,7 +33,6 @@ class Film:
         return sorted(found_movies, key=itemgetter("year"))
         
     def search_movies_by_genre_sorted_by_rating(self, genre: str) -> list:
-        """ """
         films_to_genre: list = []
 
         for film_hash in self.films:
@@ -46,4 +45,3 @@ class Film:
                             "rating":film["rating"]
                             })
         return sorted(films_to_genre, key=itemgetter("rating"))
-        # implemented: search for movies by genre with ordered output
