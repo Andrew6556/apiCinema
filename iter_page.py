@@ -2,8 +2,8 @@ from film import Film
 
 
 class IterPage:
-    def __init__(self, films: list) -> None:
-        self.film = films
+    def __init__(self, films) -> None:
+        self.films = films
         self.count_page = len(films)
         self.current_page = 0
     
@@ -11,6 +11,7 @@ class IterPage:
         return self
 
     def __next__(self):
+        print(f'{self.films}\n')
         if self.current_page < self.count_page:
             self.count_page += 1
-            return 
+            return self.films[self.current_page:]
