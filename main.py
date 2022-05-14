@@ -18,17 +18,22 @@ films.search_movies_by_genre_sorted_by_rating('криминал')
 # # print(next(iter_page))
 # print(iter_page.films)
 
+# a = []
 
 # arr =  [
-#         'IMG_0023_475_30.tif', 'IMG_0023_550_20.tif', 
-#         'IMG_0023_670_30.tif', 'IMG_0023_715_10.tif', 
-#         'IMG_0023_840_20.tif', 'IMG_0024_475_30.tif', 
-#         'IMG_0024_550_20.tif', 'IMG_0024_670_30.tif', 
-#         'IMG_0024_715_10.tif', 'IMG_0024_840_20.tif', 
-#         'IMG_0025_475_30.tif', 'IMG_0025_550_20.tif', 
-#         'IMG_0025_670_30.tif', 'IMG_0025_715_10.tif', 
-#         'IMG_0025_840_20.tif', 'IMG_0026_475_30.tif', 
-#         'IMG_0026_550_20.tif', 'IMG_0026_670_30.tif', 
-#         'IMG_0026_715_10.tif', 'IMG_0026_840_20.tif']
-# for i in range(0, len(arr)):
-#     print(arr[i:i + 5])
+#         '1',  '2', 
+#         '3',  '4', 
+#         '5',  '6', 
+#         '7',  '8', 
+#         '9',  '10', 
+#         '11', '12',
+#         '13', '14',
+#         '15', '16',
+#         '17', '18',
+#         '19', '20',
+#         '21', ]
+
+# for i in range(0, len(arr), 5):
+#     a.append(arr[i:i + 5])
+
+# print(a)

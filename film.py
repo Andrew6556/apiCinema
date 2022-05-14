@@ -31,11 +31,13 @@ class Film:
                             "rating":film["rating"]
                         })
         return sorted(found_movies, key=itemgetter("year"))
+    
+    def __pagination_of_movies(self, sort_film: list, films_to_genre: list) -> list:
+        return [sort_film[i:i+5] for i in range(0, len(films_to_genre), 5)]
 
     def search_movies_by_genre_sorted_by_rating(self, genre: str) -> list:
         films_to_genre = []
         
-        fm = []
         for film_hash in self.films:
             for film in film_hash:
                 if genre.lower() in [film["genres"][i]["genre"]\
@@ -45,8 +47,8 @@ class Film:
                             "year":film["year"],
                             "rating":film["rating"]
                             })
-        fil = sorted(films_to_genre, key=itemgetter("rating"))
-        list(map(lambda x: fm.append(x), [fil[i:i+5] for i in range(1,len(films_to_genre), 5)]))
-        print(fm)
-        # print(sorted(films_to_genre, key=itemgetter("rating")))
-        # return sorted(films_to_genre, key=itemgetter("rating"))
+
+        # list(map(lambda x: films_sort_page.append(x), [fil[i:i+5] for i in range(0, len(films_to_genre), 5)]))
+        # a = [fil[i:i+5] for i in range(0, len(films_to_genre), 5)]
+        
+        return self.__pagination_of_movies(sorted(films_to_genre, key=itemgetter("rating")), films_to_genre)
