@@ -9,6 +9,7 @@ class Film:
         self.films = films
 
     def films_by_specific_genre(self, genre: str) -> list:
+        """список фильмов по жанру"""
         films_to_genre: list = []
         for film_hash in self.films:
             for films in film_hash:
@@ -18,7 +19,11 @@ class Film:
 
         return films_to_genre        
 
-    def sorted_output_of_the_requested_movie(self, movie: str) -> list:
+    def sorted_output_of_the_requested_movie_year(self, movie: str) -> list:
+        """
+            Нахождение конретного фильма и его продолжений
+            Сортированных по году
+        """
         found_movies = []
 
         for film_hash in self.films:
@@ -30,12 +35,15 @@ class Film:
                             "year":film["year"],
                             "rating":film["rating"]
                         })
+        
         return sorted(found_movies, key=itemgetter("year"))
     
     def __pagination_of_movies(self, sort_film: list, films_to_genre: list) -> list:
         return [sort_film[i:i+5] for i in range(0, len(films_to_genre), 5)]
 
     def search_movies_by_genre_sorted_by_rating(self, genre: str) -> list:
+        """Вывод всех фильмов по конретному жанру отсортированных по году"""
+
         films_to_genre = []
         
         for film_hash in self.films:
@@ -47,8 +55,5 @@ class Film:
                             "year":film["year"],
                             "rating":film["rating"]
                             })
-
-        # list(map(lambda x: films_sort_page.append(x), [fil[i:i+5] for i in range(0, len(films_to_genre), 5)]))
-        # a = [fil[i:i+5] for i in range(0, len(films_to_genre), 5)]
-        
-        return self.__pagination_of_movies(sorted(films_to_genre, key=itemgetter("rating")), films_to_genre)
+        return self.__pagination_of_movies(
+                        sorted(films_to_genre, key=itemgetter("rating")), films_to_genre)

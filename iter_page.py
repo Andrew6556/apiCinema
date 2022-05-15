@@ -11,7 +11,6 @@ class IterPage:
         return self
 
     def __next__(self):
-        print(f'{self.films}\n')
         if self.current_page < self.count_page:
             self.count_page += 1
-            return self.films[self.current_page:]
+            return self.films[self.current_page]
