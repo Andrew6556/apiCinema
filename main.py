@@ -18,9 +18,19 @@ print("""
     2.Нахождение фильма по интересующему вас жанру        
     """)
 
-films = Film(read_json_file(PATH_JSON_FILMS))
+# films = Film(read_json_file(PATH_JSON_FILMS))
 
-consol_films = Interface_Films(films)
+# consol_films = Interface_Films(films)
+
+# iter_page = IterPage(films.search_movies_by_genre_sorted_by_rating('боевик'), consol_films)
+# print(next(iter_page))
+
+# iter_page.interface_films.output_search_movies_by_genre_sorted_by_rating('боевик')
+
+
+
+
+# iter_page.interface_films.output_search_movies_by_genre_sorted_by_rating('боевик')
 
 # choice_user = int(input('Что вы хотите сделать(напишите цифрой): ')) 
 
@@ -36,7 +46,7 @@ consol_films = Interface_Films(films)
 
 
 # consol_films.concol_sorted_output_of_the_requested_movie_year('Брат')
-
-# iter_page = IterPage(films.search_movies_by_genre_sorted_by_rating('криминал'))
-# print(iter_page.films)
-# print(next(iter_page))
+films = Film(read_json_file(PATH_JSON_FILMS))
+iter_page = IterPage(films.search_movies_by_genre_sorted_rating('боевик'))
+int_films = Interface_Films(iter_page.films)
+int_films.output_search_movies_by_genre_sorted_rating("Боевик")

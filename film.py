@@ -41,8 +41,8 @@ class Film:
     def __pagination_of_movies(self, sort_film: list, films_to_genre: list) -> list:
         return [sort_film[i:i+5] for i in range(0, len(films_to_genre), 5)]
 
-    def search_movies_by_genre_sorted_by_rating(self, genre: str) -> list:
-        """Вывод всех фильмов по конретному жанру отсортированных по году"""
+    def search_movies_by_genre_sorted_rating(self, genre: str) -> list:
+        """Вывод всех фильмов по конретному жанру отсортированных по рейтингу"""
 
         films_to_genre = []
         

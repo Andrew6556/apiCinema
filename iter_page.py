@@ -7,10 +7,10 @@ class IterPage:
         self.count_page = len(films)
         self.current_page = 0
     
-    def __iter__(self):
+    def __iter__(self) -> object:
         return self
 
-    def __next__(self):
+    def __next__(self) -> list:
         if self.current_page < self.count_page:
-            self.count_page += 1
-            return self.films[self.current_page]
+            self.current_page += 1
+            return self.films[self.current_page - 1]
