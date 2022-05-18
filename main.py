@@ -5,6 +5,7 @@ from func_api import all_pages_films
 from concol_film import Interface_Films
 from iter_page import IterPage
 import inspect
+
 # if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
 #     for number in range(1, all_pages_films("pagesCount") + 1):
 #         data = read_json_file(PATH_JSON_FILMS)
@@ -18,17 +19,6 @@ print("""
     2.Нахождение фильма по интересующему вас жанру        
     """)
 
-# iter_page = IterPage(films.search_movies_by_genre_sorted_by_rating('боевик'))
-
-# iter_page = IterPage(films.search_movies_by_genre_sorted_by_rating('боевик'), consol_films)
-# print(next(iter_page))
-
-# iter_page.interface_films.output_search_movies_by_genre_sorted_by_rating('боевик')
-
-
-
-
-# iter_page.interface_films.output_search_movies_by_genre_sorted_by_rating('боевик')
 
 choice_user = int(input('Что вы хотите сделать(напишите цифрой): ')) 
 
