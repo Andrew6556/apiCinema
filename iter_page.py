@@ -14,3 +14,5 @@ class IterPage:
         if self.current_page < self.count_page:
             self.current_page += 1
             return self.films[self.current_page - 1]
+
+        raise StopIteration
