@@ -11,7 +11,7 @@ class Interface_Films:
         sorted_movie_year = self.films.sorted_output_of_the_requested_movie_year(movie)
         if sorted_movie_year:
             for film_hash in sorted_movie_year:
-                print(f"{film_hash['film']} ({film_hash['year']}), {film_hash['rating']}")
+                print(emoji.emojize(f"{film_hash['film']} ({film_hash['year']}),:star: {film_hash['rating']}"))
         else:
             print('Вы ввели не существующий фильм')
         
