@@ -1,6 +1,3 @@
-from film import Film
-
-
 class IterPage:
     def __init__(self, films) -> None:
         self.films = films
@@ -11,6 +8,7 @@ class IterPage:
         return self
 
     def __next__(self) -> list:
+        """Последующие перелистывание вперед"""
         if self.current_page < self.count_page:
             self.current_page += 1
             return self.films[self.current_page - 1]

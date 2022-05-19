@@ -10,4 +10,4 @@ def all_pages_films(chapter: str, pages: int=1):
         "Content-type": "application/json",
         "X-API-KEY": API_KEY
     }
-).json()[chapter]
+    ).json()[chapter]

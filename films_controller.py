@@ -3,7 +3,7 @@ import re
 
 
 
-class Film:
+class FilmsController:
 
     def __init__(self, films: list) -> None:
         self.films = films
