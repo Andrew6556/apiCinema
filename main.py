@@ -2,11 +2,14 @@ from films_controller import FilmsController
 from path_file import PATH_JSON_FILMS
 from read_write_json import read_json_file
 from concol_film import Interface_Films
+from user_interface import UserInterface
+from user import User
 from iter_page import IterPage
+from exceptions import*
 
 import inspect
 
-from user import User
+
 
 # if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
 #     for number in range(1, all_pages_films("pagesCount") + 1):
@@ -14,22 +17,51 @@ from user import User
 #         data.append(all_pages_films("films", number))
 #         write_json_file(PATH_JSON_FILMS, data)
 
-user_choice = int(input("\
-            \nЧто вы хотите сделать:\
-            \n1.Зарегистрироваться\
-            \n2.Войти\
-            \nВаш выбор: "))
 
-if user_choice == 1:
-    user_name = input('Введите ваше имя: ')
-    
-    user_password = int(input("введите ваш пароль: "))
-    user = User(user_name, user_password)
-    user.registration()
+loop: bool = True
+while loop:
+    user_choice: int = int(input("\
+                \nЧто вы хотите сделать:\
+                \n1.Зарегистрироваться\
+                \n2.Войти\
+                \nВаш выбор: "))
 
+    if user_choice == 1:
+        while True:
+            user_name = input('Введите ваше имя\n')
+            user_password = int(input('Введите пароль\n'))
+            
+            user = User(user_name, user_password)
+            console = UserInterface(user)
 
+            try:
+                user.user_registration()
+            except IncorrectLoginNumbers:
+                console.error_message_in_login()
+            except LoginStartsWithNoCharacters:
+                console.error_message_in_login()
+            except IncorrectPasswordEntry:
+                console.correct_password_processing()
+            else:
+                break
+        print('Регистрация прошла успешно')
 
+    elif user_choice == 2:
+        while loop:
+            user_name = input('Введите ваше имя\n')
+            user_password = int(input('Введите пароль\n'))
 
+            try:
+                user = User.authenticate(user_name, user_password)
+                user_int = UserInterface(user)
+            except UserNameDoesNotExist:
+                print('Такого имени не существует в базе')
+            except PasswordError:
+                print('Неверный пароль!')
+            else:
+                loop = False
+    else:
+        print('Вы ввели не корректное действие')
 
 
 
