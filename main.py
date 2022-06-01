@@ -18,53 +18,60 @@ import inspect
 #         write_json_file(PATH_JSON_FILMS, data)
 
 
-loop: bool = True
-while loop:
-    user_choice: int = int(input("\
-                \nЧто вы хотите сделать:\
-                \n1.Зарегистрироваться\
-                \n2.Войти\
-                \nВаш выбор: "))
+# loop: bool = True
+# while loop:
+#     user_choice: int = int(input("\
+#                 \nЧто вы хотите сделать:\
+#                 \n1.Зарегистрироваться\
+#                 \n2.Войти\
+#                 \nВаш выбор: "))
 
-    if user_choice == 1:
-        while True:
-            user_name = input('Введите ваше имя\n')
-            user_password = int(input('Введите пароль\n'))
+#     if user_choice == 1:
+#         while True:
+#             user_name = input('Введите ваше имя\n')
+#             user_password = int(input('Введите пароль\n'))
             
-            user = User(user_name, user_password)
-            console = UserInterface(user)
+#             user = User(user_name, user_password)
+#             console = UserInterface(user)
 
-            try:
-                user.user_registration()
-            except IncorrectLoginNumbers:
-                console.error_message_in_login()
-            except LoginStartsWithNoCharacters:
-                console.error_message_in_login()
-            except IncorrectPasswordEntry:
-                console.correct_password_processing()
-            else:
-                break
-        print('Регистрация прошла успешно')
+#             try:
+#                 user.user_registration()
+#             except IncorrectLoginNumbers:
+#                 console.error_message_in_login()
+#             except LoginStartsWithNoCharacters:
+#                 console.error_message_in_login()
+#             except IncorrectPasswordEntry:
+#                 console.correct_password_processing()
+#             else:
+#                 break
+#         print('Регистрация прошла успешно')
 
-    elif user_choice == 2:
-        while loop:
-            user_name = input('Введите ваше имя\n')
-            user_password = int(input('Введите пароль\n'))
+#     elif user_choice == 2:
+#         while loop:
+#             user_name = input('Введите ваше имя\n')
+#             user_password = int(input('Введите пароль\n'))
 
-            try:
-                user = User.authenticate(user_name, user_password)
-                user_int = UserInterface(user)
-            except UserNameDoesNotExist:
-                print('Такого имени не существует в базе')
-            except PasswordError:
-                print('Неверный пароль!')
-            else:
-                loop = False
-    else:
-        print('Вы ввели не корректное действие')
+#             try:
+#                 user = User.authenticate(user_name, user_password)
+#                 user_int = UserInterface(user)
+#             except UserNameDoesNotExist:
+#                 print('Такого имени не существует в базе')
+#             except PasswordError:
+#                 print('Неверный пароль!')
+#             else:
+#                 loop = False
+#     else:
+#         print('Вы ввели не корректное действие')
 
-
-
+while True:
+    print("""
+        1.Можете добавлять в профиль просмотренные
+        (нажав сюда, вы также можете вывести все просмотренные фильмы)
+        2.Добавить фильмы в профиль, которые вы хотите посмотреть потом
+        3.Выставить свои отметки фильмам 
+        (в дальнейшим фильмы можно вывести по рейтингу)
+    """)
+    break
 
 
 
