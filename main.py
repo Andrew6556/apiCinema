@@ -63,6 +63,11 @@ import inspect
 #     else:
 #         print('Вы ввели не корректное действие')
 
+
+films = FilmsController(read_json_file(PATH_JSON_FILMS))
+consol_films = Interface_Films(films)
+consol_films.output_of_found_films('брат')
+exit()
 while True:
     print("""
         1.Можете добавлять в профиль просмотренные
@@ -71,10 +76,17 @@ while True:
         3.Выставить свои отметки фильмам 
         (в дальнейшим фильмы можно вывести по рейтингу)
     """)
+
+    choice_user: int = int(input('введите,что выбрали(цифру): '))
+
+    if choice_user == 1:
+        movie_title = input('Напишите название просмотренного фильма\n')
+        user = User('1',1)
+        # user.add_viewed_to_profile('брат')
+        # films = FilmsController(read_json_file(PATH_JSON_FILMS))
+        # films.a_set_of_occurrences_based_on_a_misspelled_film('брат')
+
     break
-
-
-
 
 
 

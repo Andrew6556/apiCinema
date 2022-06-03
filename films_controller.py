@@ -2,11 +2,22 @@ from operator import itemgetter
 import re
 
 
-
 class FilmsController:
 
     def __init__(self, films: list) -> None:
         self.films = films
+
+    def a_set_of_occurrences_based_on_a_misspelled_film(self, movie) -> list:
+        """Нахождение вариантов фильма,при неправильном его написание"""
+        variants_movies: list = []
+
+        for film_hash in self.films:
+            for film in film_hash:
+                if re.search(fr"\b{movie}\b",
+                    film["nameRu"], flags=re.IGNORECASE):
+                    variants_movies.append(film["nameRu"])
+
+        return dict(enumerate(variants_movies, start=1))
 
     def films_by_specific_genre(self, genre: str) -> list:
         """список фильмов по жанру"""

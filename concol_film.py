@@ -19,3 +19,10 @@ class Interface_Films:
         for sorted_films in self.films:
             print(emoji.emojize(f"{sorted_films['film']} ({sorted_films['year']}),:star: {sorted_films['rating']}"))
         
+    def output_of_found_films(self, movie: str):
+        result = self.films.a_set_of_occurrences_based_on_a_misspelled_film(movie)
+        if len(result) != 0:
+            for num, film in result.items():
+                print(f"{num}. {film}")
+        else:
+            print("видимой, вы ввели фильма которого нету")
