@@ -1,4 +1,5 @@
 from operator import itemgetter
+from exceptions import MovieNotfound,NotCorrectIndex
 import re
 
 
@@ -7,6 +8,15 @@ class FilmsController:
     def __init__(self, films: list) -> None:
         self.films = films
 
+    def check_correct_name_movie(func):
+        def wrapper(self, movie, *args, **kwargs):
+            result = func(self, movie, *args, **kwargs)
+            if len(result) == 0:
+                raise MovieNotfound
+            return result
+        return wrapper
+
+    @check_correct_name_movie
     def a_set_of_occurrences_based_on_a_misspelled_film(self, movie) -> list:
         """Нахождение вариантов фильма,при неправильном его написание"""
         variants_movies: list = []

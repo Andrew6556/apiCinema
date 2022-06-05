@@ -18,56 +18,52 @@ import inspect
 #         write_json_file(PATH_JSON_FILMS, data)
 
 
-# loop: bool = True
-# while loop:
-#     user_choice: int = int(input("\
-#                 \nЧто вы хотите сделать:\
-#                 \n1.Зарегистрироваться\
-#                 \n2.Войти\
-#                 \nВаш выбор: "))
+loop: bool = True
+while loop:
+    user_choice: int = int(input("\
+                \nЧто вы хотите сделать:\
+                \n1.Зарегистрироваться\
+                \n2.Войти\
+                \nВаш выбор: "))
 
-#     if user_choice == 1:
-#         while True:
-#             user_name = input('Введите ваше имя\n')
-#             user_password = int(input('Введите пароль\n'))
+    if user_choice == 1:
+        while True:
+            user_name = input('Введите ваше имя\n')
+            user_password = int(input('Введите пароль\n'))
             
-#             user = User(user_name, user_password)
-#             console = UserInterface(user)
+            user = User(user_name, user_password)
+            console = UserInterface(user)
 
-#             try:
-#                 user.user_registration()
-#             except IncorrectLoginNumbers:
-#                 console.error_message_in_login()
-#             except LoginStartsWithNoCharacters:
-#                 console.error_message_in_login()
-#             except IncorrectPasswordEntry:
-#                 console.correct_password_processing()
-#             else:
-#                 break
-#         print('Регистрация прошла успешно')
+            try:
+                user.user_registration()
+            except IncorrectLoginNumbers:
+                console.error_message_in_login()
+            except LoginStartsWithNoCharacters:
+                console.error_message_in_login()
+            except IncorrectPasswordEntry:
+                console.correct_password_processing()
+            else:
+                break
+        print('Регистрация прошла успешно')
 
-#     elif user_choice == 2:
-#         while loop:
-#             user_name = input('Введите ваше имя\n')
-#             user_password = int(input('Введите пароль\n'))
+    elif user_choice == 2:
+        while loop:
+            user_name = input('Введите ваше имя\n')
+            user_password = int(input('Введите пароль\n'))
 
-#             try:
-#                 user = User.authenticate(user_name, user_password)
-#                 user_int = UserInterface(user)
-#             except UserNameDoesNotExist:
-#                 print('Такого имени не существует в базе')
-#             except PasswordError:
-#                 print('Неверный пароль!')
-#             else:
-#                 loop = False
-#     else:
-#         print('Вы ввели не корректное действие')
+            try:
+                user = User.authenticate(user_name, user_password)
+                user_int = UserInterface(user)
+            except UserNameDoesNotExist:
+                print('Такого имени не существует в базе')
+            except PasswordError:
+                print('Неверный пароль!')
+            else:
+                loop = False
+    else:
+        print('Вы ввели не корректное действие')
 
-
-films = FilmsController(read_json_file(PATH_JSON_FILMS))
-consol_films = Interface_Films(films)
-consol_films.output_of_found_films('брат')
-exit()
+loop_film_input = True 
 while True:
     print("""
         1.Можете добавлять в профиль просмотренные
@@ -80,13 +76,31 @@ while True:
     choice_user: int = int(input('введите,что выбрали(цифру): '))
 
     if choice_user == 1:
-        movie_title = input('Напишите название просмотренного фильма\n')
-        user = User('1',1)
-        # user.add_viewed_to_profile('брат')
-        # films = FilmsController(read_json_file(PATH_JSON_FILMS))
-        # films.a_set_of_occurrences_based_on_a_misspelled_film('брат')
+        while loop_film_input:
+            films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
-    break
+            consol_films = Interface_Films(films)
+
+            while loop_film_input:
+                movie_title = input('Напишите название просмотренного фильма\n')
+                try:
+                    consol_films.output_of_found_films(movie_title)
+                except MovieNotfound:
+                    consol_films.output_of_found_films(movie_title)
+                else:
+                    while loop_film_input:
+                        try:
+                            choice_watched_movie: int = int(input("Выберете,что из этого смотрели(введите цифру): "))
+                            user.add_viewed_to_profile(
+                                films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
+                                )
+                        except KeyError:
+                            print('Введена недопустимая цифра вводе')
+                        else:
+                            loop_film_input = False
+                            print("Вы успешно добавили фильм!")
+                
+        print('aaa')
 
 
 
@@ -94,9 +108,9 @@ while True:
 
 
 
-
-
-
+# постраничный вывод фильмов
+# пункт 2. Добавьте функционал поиска фильмов по жанру, также сортируйте фильмы по рейтинг.
+# Реализован ниже
 
 
 

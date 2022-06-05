@@ -14,3 +14,9 @@ class IncorrectLoginNumbers(Exception):
 
 class LoginStartsWithNoCharacters(Exception):
     pass
+
+class MovieNotfound(Exception):
+    pass
+
+class NotCorrectIndex(Exception):
+    pass

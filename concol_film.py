@@ -1,5 +1,5 @@
+from exceptions import MovieNotfound
 import emoji
-
 
 
 
@@ -20,9 +20,10 @@ class Interface_Films:
             print(emoji.emojize(f"{sorted_films['film']} ({sorted_films['year']}),:star: {sorted_films['rating']}"))
         
     def output_of_found_films(self, movie: str):
-        result = self.films.a_set_of_occurrences_based_on_a_misspelled_film(movie)
-        if len(result) != 0:
+        try:
+            result = self.films.a_set_of_occurrences_based_on_a_misspelled_film(movie)
+        except MovieNotfound:
+            print("видимо, вы ввели фильма которого нету")
+        else:
             for num, film in result.items():
                 print(f"{num}. {film}")
-        else:
-            print("видимой, вы ввели фильма которого нету")

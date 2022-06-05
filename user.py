@@ -5,6 +5,16 @@ from path_file import PATH_JSON_REGISTRATION, PATH_INFO_USERS
 import os
 from exceptions import*
 
+def file_content(path_json: str):
+    if os.stat(f'data/{path_json}').st_size:
+        data: json = read_json_file(path_json)
+    else:
+        data: dict = {}
+    return data
+
+
+
+
 class User:
 
     @staticmethod
@@ -47,10 +57,7 @@ class User:
     @checking_for_correct_login
     def user_registration(self):
 
-        if os.stat(f'data/{PATH_JSON_REGISTRATION}').st_size:
-            data = read_json_file(PATH_JSON_REGISTRATION)
-        else:
-            data = {}
+        data = file_content(PATH_JSON_REGISTRATION)
 
         data.update({
             self.username:{
@@ -60,15 +67,17 @@ class User:
         write_json_file(PATH_JSON_REGISTRATION, data)
 
     def add_viewed_to_profile(self, watched_movie: str):
-        if os.stat(f'data/{PATH_INFO_USERS}').st_size:
-            data: json = read_json_file(PATH_INFO_USERS)
+        data = file_content(PATH_INFO_USERS)
+
+        print(data)
+        for user, data_us in data.items():
+            if user == self.username:
+                data_us["watched movie"].append(watched_movie)
+                break
         else:
-            data: dict = {}
-
-        data.update({
-            self.username:{
-                "watched movie": watched_movie
-                }
-            })
-
+            data.update({
+                self.username:{
+                    "watched movie":[watched_movie]
+                }})
+                
         write_json_file(PATH_INFO_USERS, data)
