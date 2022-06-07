@@ -80,25 +80,26 @@ while True:
         consol_films = Interface_Films(films)
 
         while True:
-            movie_title = input('Напишите название просмотренного фильма\n')
+            movie_title: str = input('Напишите название просмотренного фильма\n')
             try:
-                consol_films.output_of_found_films(movie_title)
+                films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)
             except MovieNotfound:
                 consol_films.output_of_found_films(movie_title)
-            
+            else:
+                consol_films.output_of_found_films(movie_title)
+                break
 
-            print('a')
-        # while True:
-        #     try:
-        #         choice_watched_movie: int = int(input("Выберете,что из этого смотрели(введите цифру): "))
-        #         user.add_viewed_to_profile(
-        #             films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
-        #             )
-        #     except KeyError:
-        #         print('Введена недопустимая цифра вводе')
-        #     else:
-        #         print("Вы успешно добавили фильм!")
-        #         break
+        while True:
+            try:
+                choice_watched_movie: int = int(input("Выберете,что из этого смотрели(введите цифру): "))
+                user.add_viewed_to_profile(
+                    films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
+                    )
+            except KeyError:
+                print('Введена недопустимая цифра вводе')
+            else:
+                print("Вы успешно добавили фильм!")
+                break
                 
         # print('aaa')
 

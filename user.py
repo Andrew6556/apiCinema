@@ -1,9 +1,9 @@
-import json
 from read_write_json import write_json_file, read_json_file
 from path_file import PATH_JSON_REGISTRATION, PATH_INFO_USERS
+from exceptions import*
 
 import os
-from exceptions import*
+import json
 
 def file_content(path_json: str):
     if os.stat(f'data/{path_json}').st_size:
@@ -69,7 +69,6 @@ class User:
     def add_viewed_to_profile(self, watched_movie: str):
         data = file_content(PATH_INFO_USERS)
 
-        print(data)
         for user, data_us in data.items():
             if user == self.username:
                 data_us["watched movie"].append(watched_movie)

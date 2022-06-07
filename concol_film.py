@@ -1,5 +1,6 @@
 from exceptions import MovieNotfound
 import emoji
+import inspect
 
 
 
@@ -17,7 +18,7 @@ class Interface_Films:
         
     def output_search_movies_by_genre_sorted_rating(self):
         for sorted_films in self.films:
-            print(emoji.emojize(f"{sorted_films['film']} ({sorted_films['year']}),:star: {sorted_films['rating']}"))
+            print(emoji.emojize(inspect.cleandoc(f"{sorted_films['film']}({sorted_films['year']}),:star: {sorted_films['rating']}")))
         
     def output_of_found_films(self, movie: str):
         try:

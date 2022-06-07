@@ -17,6 +17,3 @@ class LoginStartsWithNoCharacters(Exception):
 
 class MovieNotfound(Exception):
     pass
-
-class NotCorrectIndex(Exception):
-    pass
