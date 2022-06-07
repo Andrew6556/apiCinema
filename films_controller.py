@@ -1,5 +1,5 @@
 from operator import itemgetter
-from exceptions import MovieNotfound,NotCorrectIndex
+from exceptions import MovieNotfound, NotCorrectIndex 
 import re
 
 
@@ -15,7 +15,17 @@ class FilmsController:
                 raise MovieNotfound
             return result
         return wrapper
+    
+    # def check_not_correct_index(func):
+    #     def wrapper(self, movie, *args, **kwargs):
+    #         result = func(self, movie, *args, **kwargs)
+    #         print(result.key())
+    #         # if result.key() == 0:
+    #         #     raise NotCorrectIndex
+    #         return result
+    #     return wrapper
 
+    # @check_not_correct_index
     @check_correct_name_movie
     def a_set_of_occurrences_based_on_a_misspelled_film(self, movie) -> list:
         """Нахождение вариантов фильма,при неправильном его написание"""

@@ -63,7 +63,6 @@ while loop:
     else:
         print('Вы ввели не корректное действие')
 
-loop_film_input = True 
 while True:
     print("""
         1.Можете добавлять в профиль просмотренные
@@ -76,31 +75,32 @@ while True:
     choice_user: int = int(input('введите,что выбрали(цифру): '))
 
     if choice_user == 1:
-        while loop_film_input:
-            films = FilmsController(read_json_file(PATH_JSON_FILMS))
+        films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
-            consol_films = Interface_Films(films)
+        consol_films = Interface_Films(films)
 
-            while loop_film_input:
-                movie_title = input('Напишите название просмотренного фильма\n')
-                try:
-                    consol_films.output_of_found_films(movie_title)
-                except MovieNotfound:
-                    consol_films.output_of_found_films(movie_title)
-                else:
-                    while loop_film_input:
-                        try:
-                            choice_watched_movie: int = int(input("Выберете,что из этого смотрели(введите цифру): "))
-                            user.add_viewed_to_profile(
-                                films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
-                                )
-                        except KeyError:
-                            print('Введена недопустимая цифра вводе')
-                        else:
-                            loop_film_input = False
-                            print("Вы успешно добавили фильм!")
+        while True:
+            movie_title = input('Напишите название просмотренного фильма\n')
+            try:
+                consol_films.output_of_found_films(movie_title)
+            except MovieNotfound:
+                consol_films.output_of_found_films(movie_title)
+            
+
+            print('a')
+        # while True:
+        #     try:
+        #         choice_watched_movie: int = int(input("Выберете,что из этого смотрели(введите цифру): "))
+        #         user.add_viewed_to_profile(
+        #             films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
+        #             )
+        #     except KeyError:
+        #         print('Введена недопустимая цифра вводе')
+        #     else:
+        #         print("Вы успешно добавили фильм!")
+        #         break
                 
-        print('aaa')
+        # print('aaa')
 
 
 
