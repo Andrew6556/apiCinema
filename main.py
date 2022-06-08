@@ -99,13 +99,20 @@ while True:
                 print('Введена недопустимая цифра вводе')
             else:
                 print("Вы успешно добавили фильм!")
+                choice_display_watched_movies = input(inspect.cleandoc("""
+                                                    Вы хотите посмотреть все просмотренные фильмы в вашем профиле?
+                                                    Напишите,Да или Нет: """))
+                if choice_display_watched_movies.title() in ['Да',"Yes"]:
+                    print("Просмотренные фильмы:")
+                    consol_films.display_watched_movies(user_name)
                 break
                 
-        # print('aaa')
+    elif choice_user == 2:
+        films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
-
-
-
+        consol_films = Interface_Films(films)
+        
+        pass
 
 
 

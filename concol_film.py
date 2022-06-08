@@ -1,4 +1,7 @@
 from exceptions import MovieNotfound
+from read_write_json import read_json_file
+from path_file import PATH_INFO_USERS
+
 import emoji
 import inspect
 
@@ -28,3 +31,11 @@ class Interface_Films:
         else:
             for num, film in result.items():
                 print(f"{num}. {film}")
+
+    def display_watched_movies(sefl, name):
+        for data_info in read_json_file(PATH_INFO_USERS)[name].values():
+            for index, movies_watched in enumerate(data_info, start=1):
+                print(f"{index}. {movies_watched}")
+
+            
+
