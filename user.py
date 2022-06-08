@@ -33,6 +33,17 @@ class User:
         self.username = name
         self.password = password
 
+    def _basic_user_data(sefl):
+        data = file_content(PATH_INFO_USERS)
+
+        data.update({
+            sefl.username:{
+                "watched movie":[],
+                "watch later":[]
+                }})
+
+        write_json_file(PATH_INFO_USERS, data)
+
     def checking_for_password_complexity(func):
         """Проверяем на сложность пароль"""
         def wrapper(self):
@@ -65,33 +76,34 @@ class User:
                 }
                 })
         write_json_file(PATH_JSON_REGISTRATION, data)
+        self._basic_user_data()
 
-    def add_viewed_to_profile(self, watched_movie: str):
-        data = file_content(PATH_INFO_USERS)
+    # def add_viewed_to_profile(self, watched_movie: str):
+    #     data = file_content(PATH_INFO_USERS)
 
-        for user, data_us in data.items():
-            if user == self.username:
-                data_us["watched movie"].append(watched_movie)
-                break
-        else:
-            data.update({
-                self.username:{
-                    "watched movie":[watched_movie]
-                }})
+    #     for user, data_us in data.items():
+    #         if user == self.username:
+    #             data_us["watched movie"].append(watched_movie)
+    #             break
+    #     else:
+    #         data.update({
+    #             self.username:{
+    #                 "watched movie":[watched_movie]
+    #             }})
                 
-        write_json_file(PATH_INFO_USERS, data)
+    #     write_json_file(PATH_INFO_USERS, data)
 
-    def adding_a_movie_for_further_viewing(self, movie_later):
-        data = file_content(PATH_INFO_USERS)
+    # def adding_a_movie_for_further_viewing(self, movie_later):
+    #     data = file_content(PATH_INFO_USERS)
 
-        for user, data_us in data.items():
-            if user == self.username:
-                data_us["watch later"].append(movie_later)
-                break
-        else:
-            data.update({
-                self.username:{
-                    "watched movie":[movie_later]
-                }})
+    #     for user, data_us in data.items():
+    #         if user == self.username:
+    #             data_us["watch later"].append(movie_later)
+    #             break
+    #     else:
+    #         data.update({
+    #             self.username:{
+    #                 "watch later":[movie_later]
+    #             }})
 
-        write_json_file(PATH_INFO_USERS, data)
+    #     write_json_file(PATH_INFO_USERS, data)
