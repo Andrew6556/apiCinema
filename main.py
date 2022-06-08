@@ -111,7 +111,7 @@ while True:
         films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
         consol_films = Interface_Films(films)
-        
+        user.adding_a_movie_for_further_viewing("s")
         pass
 
 

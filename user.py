@@ -80,3 +80,18 @@ class User:
                 }})
                 
         write_json_file(PATH_INFO_USERS, data)
+
+    def adding_a_movie_for_further_viewing(self, movie_later):
+        data = file_content(PATH_INFO_USERS)
+
+        for user, data_us in data.items():
+            if user == self.username:
+                data_us["watch later"].append(movie_later)
+                break
+        else:
+            data.update({
+                self.username:{
+                    "watched movie":[movie_later]
+                }})
+
+        write_json_file(PATH_INFO_USERS, data)
