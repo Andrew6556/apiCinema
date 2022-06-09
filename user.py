@@ -67,7 +67,6 @@ class User:
     @checking_for_password_complexity
     @checking_for_correct_login
     def user_registration(self):
-
         data = file_content(PATH_JSON_REGISTRATION)
 
         data.update({
@@ -78,32 +77,24 @@ class User:
         write_json_file(PATH_JSON_REGISTRATION, data)
         self._basic_user_data()
 
-    # def add_viewed_to_profile(self, watched_movie: str):
-    #     data = file_content(PATH_INFO_USERS)
+    def add_viewed_to_profile(self, watched_movie: str):
+        """Добавление просмотренного фильма"""
+        data = file_content(PATH_INFO_USERS)
 
-    #     for user, data_us in data.items():
-    #         if user == self.username:
-    #             data_us["watched movie"].append(watched_movie)
-    #             break
-    #     else:
-    #         data.update({
-    #             self.username:{
-    #                 "watched movie":[watched_movie]
-    #             }})
+        for user, data_us in data.items():
+            if user == self.username:
+                data_us["watched movie"].append(watched_movie)
+                break
                 
-    #     write_json_file(PATH_INFO_USERS, data)
+        write_json_file(PATH_INFO_USERS, data)
 
-    # def adding_a_movie_for_further_viewing(self, movie_later):
-    #     data = file_content(PATH_INFO_USERS)
+    def adding_a_movie_for_further_viewing(self, movie_later):
+        """Сохраняем фильм на просмотр Позже"""
+        data = file_content(PATH_INFO_USERS)
 
-    #     for user, data_us in data.items():
-    #         if user == self.username:
-    #             data_us["watch later"].append(movie_later)
-    #             break
-    #     else:
-    #         data.update({
-    #             self.username:{
-    #                 "watch later":[movie_later]
-    #             }})
+        for user, data_us in data.items():
+            if user == self.username:
+                data_us["watch later"].append(movie_later)
+                break
 
-    #     write_json_file(PATH_INFO_USERS, data)
+        write_json_file(PATH_INFO_USERS, data)

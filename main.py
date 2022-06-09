@@ -10,7 +10,6 @@ from exceptions import*
 import inspect
 
 
-
 # if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
 #     for number in range(1, all_pages_films("pagesCount") + 1):
 #         data = read_json_file(PATH_JSON_FILMS)
@@ -111,8 +110,36 @@ while True:
         films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
         consol_films = Interface_Films(films)
-        user.adding_a_movie_for_further_viewing("s")
-        pass
+        while True:
+            movie_title: str = input('Напишите название фильма: ')
+            try:
+                films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)
+            except MovieNotfound:
+                consol_films.output_of_found_films(movie_title)
+            else:
+                consol_films.output_of_found_films(movie_title)
+                break
+
+        while True:
+            try:
+                choice_watched_movie: int = int(input("Выберете,что из этого смотрели(введите цифру): "))
+                user.adding_a_movie_for_further_viewing(
+                    films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
+                    )
+            except KeyError:
+                print('Введена недопустимая цифра вводе')
+            else:
+                print("Вы успешно добавили фильм!")
+                break
+
+        
+
+
+
+
+
+
+
 
 
 
