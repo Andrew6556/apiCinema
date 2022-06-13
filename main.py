@@ -132,7 +132,30 @@ while True:
                 print("Вы успешно добавили фильм!")
                 break
 
-        
+    elif choice_user == 3:
+        films = FilmsController(read_json_file(PATH_JSON_FILMS))
+
+        consol_films = Interface_Films(films)
+        while True:
+            movie_title: str = input('Напишите название фильма: ')
+            try:
+                films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)
+            except MovieNotfound:
+                consol_films.output_of_found_films(movie_title)
+            else:
+                consol_films.output_of_found_films(movie_title)
+                break
+
+        while True:
+            try:
+                choice_watched_movie: int = int(input("Выберете фильм(введите цифру): "))
+                film = films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
+            except KeyError:
+                print('Введена недопустимая цифра вводе')
+            else:
+                user.movie_user_rating(film)
+                print("Вы успешно добавили фильм!")
+                break
 
 
 

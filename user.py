@@ -98,3 +98,13 @@ class User:
                 break
 
         write_json_file(PATH_INFO_USERS, data)
+    
+    def movie_user_rating(sefl, film):
+        data = file_content(PATH_INFO_USERS)
+        for user, data_us in data.items():
+            if user == sefl.username:
+                data[user].update({1:2})
+                print(data)
+
+        write_json_file(PATH_INFO_USERS, data)
+
