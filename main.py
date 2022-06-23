@@ -1,11 +1,14 @@
 from films_controller import FilmsController
-from path_file import PATH_JSON_FILMS
-from read_write_json import read_json_file
 from concol_film import Interface_Films
 from user_interface import UserInterface
 from user import User
 from iter_page import IterPage
 from exceptions import*
+
+from path_file import PATH_JSON_FILMS, PATH_INFO_USERS
+from read_write_json import read_json_file, write_json_file
+from user import file_content
+
 
 import inspect
 
@@ -16,6 +19,16 @@ import inspect
 #         data.append(all_pages_films("films", number))
 #         write_json_file(PATH_JSON_FILMS, data)
 
+# data = file_content(PATH_INFO_USERS)
+# data["andreqqq"].update({"watch later":[
+#                     "Брат saq"
+#                     ]})
+# # data.update({
+# #     "andreqqq":{
+# #         "watched movie":[],
+# #         }})
+
+# write_json_file(PATH_INFO_USERS, data)
 
 loop: bool = True
 while loop:
@@ -76,8 +89,10 @@ while True:
     if choice_user == 1:
         films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
-        consol_films = Interface_Films(films)
+        consol_films = Interface_Films(films)\
 
+        user.movie_user_rating('a')
+        break
         while True:
             movie_title: str = input('Напишите название просмотренного фильма\n')
             try:
@@ -156,6 +171,7 @@ while True:
                 user.movie_user_rating(film)
                 print("Вы успешно добавили фильм!")
                 break
+
 
 
 

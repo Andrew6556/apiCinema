@@ -88,7 +88,7 @@ class User:
                 
         write_json_file(PATH_INFO_USERS, data)
 
-    def adding_a_movie_for_further_viewing(self, movie_later):
+    def adding_a_movie_for_further_viewing(self, movie_later: str):
         """Сохраняем фильм на просмотр Позже"""
         data = file_content(PATH_INFO_USERS)
 
@@ -101,10 +101,12 @@ class User:
     
     def movie_user_rating(sefl, film):
         data = file_content(PATH_INFO_USERS)
-        for user, data_us in data.items():
-            if user == sefl.username:
-                data[user].update({1:2})
-                print(data)
+        for key_hash, data_info in data[sefl.username].items():
+            #     data_us.update()
+            print(key_hash,  data_info)
 
-        write_json_file(PATH_INFO_USERS, data)
+        # for user, data_us in data.items():
+        #     print(data_us)
+
+        # write_json_file(PATH_INFO_USERS, data)
 

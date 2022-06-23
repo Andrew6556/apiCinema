@@ -8,12 +8,34 @@
         ],
         "1": 2
     },
-    "@anrey": {
+    "qandrey": {
+        "watched movie": [
+            "1+1",
+            "Властелин колец: Братство Кольца"
+        ],
+        "watch later": [
+            "Брат 2"
+        ],
+        "user rating": {
+            "films": [
+                {
+                    "брат": {
+                        "ball": 10,
+                        "genres": [
+                            0,
+                            1
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "@a": {
         "watched movie": [
             "1+1"
         ],
         "watch later": [
-            "Брат 2"
+            "1+1"
         ]
     }
 }
