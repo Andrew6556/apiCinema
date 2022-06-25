@@ -99,14 +99,24 @@ class User:
 
         write_json_file(PATH_INFO_USERS, data)
     
-    def movie_user_rating(sefl, film):
+    def movie_user_rating(sefl, film:str, ball: int, genre_movie: list):
         data = file_content(PATH_INFO_USERS)
         for key_hash, data_info in data[sefl.username].items():
-            #     data_us.update()
-            print(key_hash,  data_info)
-
-        # for user, data_us in data.items():
-        #     print(data_us)
-
-        # write_json_file(PATH_INFO_USERS, data)
+            if key_hash == "user rating":
+                data_info['films'] = {film:{
+                                        "genres":genre_movie,
+                                        "rating": ball
+                                    }}
+                #@#####print(key_hash, data_info) осталось сделать!
+                pass
+        else:
+            data[sefl.username].update({"user rating":
+                                        {"films":[
+                                            {film:{
+                                                "genres":genre_movie,
+                                                "rating": ball
+                                                }}
+                                            ]}
+                                        })
+        write_json_file(PATH_INFO_USERS, data)
 

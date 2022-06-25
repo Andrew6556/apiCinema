@@ -89,9 +89,9 @@ while True:
     if choice_user == 1:
         films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
-        consol_films = Interface_Films(films)\
+        consol_films = Interface_Films(films)
 
-        user.movie_user_rating('a')
+        user.movie_user_rating("Брат 2", films.film_genres('Брат 2'), 100)
         break
         while True:
             movie_title: str = input('Напишите название просмотренного фильма\n')
@@ -168,7 +168,8 @@ while True:
             except KeyError:
                 print('Введена недопустимая цифра вводе')
             else:
-                user.movie_user_rating(film)
+                film_score = int(input("Оцените данный фильм от 0 до 10: "))
+                user.movie_user_rating(film, film_score, films.film_genres(film))
                 print("Вы успешно добавили фильм!")
                 break
 

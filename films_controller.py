@@ -79,12 +79,12 @@ class FilmsController:
         return self.__pagination_of_movies(
                         sorted(films_to_genre, key=itemgetter("rating")), films_to_genre)
 
-    def _film_genres(self, movie: str):
+    def film_genres(self, movie: str):
         movie_genre = []
         for film_hash in self.films:
             for films in film_hash:
-                if movie.title() == films["nameRu"]:
+                if movie == films["nameRu"]:
                     movie_genre.extend([films["genres"][i]["genre"]\
                         for i in range(0 , len(films["genres"]))])
-                        
+
         return movie_genre
