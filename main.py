@@ -19,17 +19,6 @@ import inspect
 #         data.append(all_pages_films("films", number))
 #         write_json_file(PATH_JSON_FILMS, data)
 
-# data = file_content(PATH_INFO_USERS)
-# data["andreqqq"].update({"watch later":[
-#                     "Брат saq"
-#                     ]})
-# # data.update({
-# #     "andreqqq":{
-# #         "watched movie":[],
-# #         }})
-
-# write_json_file(PATH_INFO_USERS, data)
-
 loop: bool = True
 while loop:
     user_choice: int = int(input("\
@@ -90,6 +79,8 @@ while True:
         films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
         consol_films = Interface_Films(films)
+        films.sort_by_rating("@a")
+        exit()
 
         while True:
             movie_title: str = input('Напишите название просмотренного фильма\n')

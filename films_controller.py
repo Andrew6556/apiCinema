@@ -1,5 +1,8 @@
 from operator import itemgetter
 from exceptions import MovieNotfound 
+from read_write_json import read_json_file
+from path_file import PATH_INFO_USERS
+
 import re
 
 
@@ -64,7 +67,6 @@ class FilmsController:
 
     def search_movies_by_genre_sorted_rating(self, genre: str) -> list:
         """Вывод всех фильмов по конретному жанру отсортированных по рейтингу"""
-
         films_to_genre = []
         
         for film_hash in self.films:
@@ -86,5 +88,13 @@ class FilmsController:
                 if movie == films["nameRu"]:
                     movie_genre.extend([films["genres"][i]["genre"]\
                         for i in range(0 , len(films["genres"]))])
-
         return movie_genre
+
+    
+    def sort_by_rating(sefl, username):
+        films = []
+        for data_film in read_json_file(PATH_INFO_USERS)[username]\
+                                            ["user rating"]['films']:
+            films.append(data_film)
+
+        print(sorted(films, key=itemgetter("rating")))

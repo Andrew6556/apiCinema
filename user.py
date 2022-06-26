@@ -110,7 +110,7 @@ class User:
         return wrapper
 
     @check_for_valid_input_range_of_score
-    def movie_user_rating(sefl, film:str, ball: int, genre_movie: list):
+    def movie_user_rating(sefl, film: str, ball: int, genre_movie: list):
         data = file_content(PATH_INFO_USERS)
         for key_hash, data_info in data[sefl.username].items():
             if key_hash == "user rating":
