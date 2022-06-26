@@ -103,12 +103,12 @@ class User:
         data = file_content(PATH_INFO_USERS)
         for key_hash, data_info in data[sefl.username].items():
             if key_hash == "user rating":
-                data_info['films'] = {film:{
+                print("ssss")
+                data_info['films'].append({film:{
                                         "genres":genre_movie,
-                                        "rating": ball
-                                    }}
-                #@#####print(key_hash, data_info) осталось сделать!
-                pass
+                                        "rating": ball}
+                                        })
+                break
         else:
             data[sefl.username].update({"user rating":
                                         {"films":[
