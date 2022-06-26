@@ -91,8 +91,6 @@ while True:
 
         consol_films = Interface_Films(films)
 
-        user.movie_user_rating("Брат 2", films.film_genres('Брат 2'), 100)
-        break
         while True:
             movie_title: str = input('Напишите название просмотренного фильма\n')
             try:
@@ -148,9 +146,11 @@ while True:
                 break
 
     elif choice_user == 3:
-        films = FilmsController(read_json_file(PATH_JSON_FILMS))
+        user_consol = UserInterface(user)
 
+        films = FilmsController(read_json_file(PATH_JSON_FILMS))
         consol_films = Interface_Films(films)
+        
         while True:
             movie_title: str = input('Напишите название фильма: ')
             try:
@@ -161,18 +161,25 @@ while True:
                 consol_films.output_of_found_films(movie_title)
                 break
 
-        while True:
+        loop_score = True
+        while loop_score:
             try:
                 choice_watched_movie: int = int(input("Выберете фильм(введите цифру): "))
                 film = films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
             except KeyError:
                 print('Введена недопустимая цифра вводе')
             else:
-                film_score = int(input("Оцените данный фильм от 0 до 10: "))
-                user.movie_user_rating(film, film_score, films.film_genres(film))
-                print("Вы успешно добавили фильм!")
-                break
-
+                while loop_score:
+                    try:
+                        film_score = int(input("Оцените данный фильм от 0 до 10: "))
+                        user.movie_user_rating(film, film_score, films.film_genres(film))
+                    except Overestimation:
+                        user_consol.wrong_movie_rating(film, film_score, films.film_genres(film))
+                    except Score_Below_Acceptable:
+                        user_consol.wrong_movie_rating(film, film_score, films.film_genres(film))
+                    else:
+                        print("Вы успешно добавили фильм!")
+                        loop_score = False
 
 
 

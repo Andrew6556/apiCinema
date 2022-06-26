@@ -17,3 +17,9 @@ class LoginStartsWithNoCharacters(Exception):
 
 class MovieNotfound(Exception):
     pass
+
+class Overestimation(Exception):
+    pass
+
+class Score_Below_Acceptable(Exception):
+    pass

@@ -99,11 +99,21 @@ class User:
 
         write_json_file(PATH_INFO_USERS, data)
     
+
+    def check_for_valid_input_range_of_score(func):
+        def wrapper(sefl, film, ball, genre_movie):
+            if ball > 10:
+                raise Overestimation
+            elif ball < 0:
+                raise Score_Below_Acceptable
+            return func(sefl, film, ball, genre_movie)
+        return wrapper
+
+    @check_for_valid_input_range_of_score
     def movie_user_rating(sefl, film:str, ball: int, genre_movie: list):
         data = file_content(PATH_INFO_USERS)
         for key_hash, data_info in data[sefl.username].items():
             if key_hash == "user rating":
-                print("ssss")
                 data_info['films'].append({film:{
                                         "genres":genre_movie,
                                         "rating": ball}
@@ -111,12 +121,12 @@ class User:
                 break
         else:
             data[sefl.username].update({"user rating":
-                                        {"films":[
-                                            {film:{
+                                            {"films":[
+                                                {film:{
                                                 "genres":genre_movie,
                                                 "rating": ball
-                                                }}
-                                            ]}
+                                                    }}
+                                                ]}
                                         })
         write_json_file(PATH_INFO_USERS, data)
 
