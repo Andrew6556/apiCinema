@@ -3,22 +3,38 @@ from concol_film import Interface_Films
 from user_interface import UserInterface
 from user import User
 from iter_page import IterPage
+from operator import itemgetter
 from exceptions import*
+
+
 
 from path_file import PATH_JSON_FILMS, PATH_INFO_USERS
 from read_write_json import read_json_file, write_json_file
 from user import file_content
-
+from check_json_movies import check_json_movies
 
 import inspect
 
 
-# if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
-#     for number in range(1, all_pages_films("pagesCount") + 1):
-#         data = read_json_file(PATH_JSON_FILMS)
-#         data.append(all_pages_films("films", number))
-#         write_json_file(PATH_JSON_FILMS, data)
 
+# check_json_movies()
+
+hash_movie = [
+        {"один дома":{'rating':10, "genres":["криминал", "драмма", "боевик"]}}, 
+        {"1+1":{'rating':8, "genres":["криминал", "драмма", "боевик"]}},
+        {"зеленая книга":{'rating':9, "genres":["криминал", "драмма", "боевик"]}}
+    ]
+
+my_collection = [
+        {"один дома":{'rating':10, "genres":["криминал", "драмма", "боевик"]}}, 
+        {"1+1":{'rating':8, "genres":["криминал", "драмма", "боевик"]}},
+        {"зеленая книга":{'rating':9, "genres":["криминал", "драмма", "боевик"]}}
+    ]
+
+print([my_collection[i][movie]  for i in range(0, len(my_collection)) for movie in hash_movie[i]])
+a = [my_collection[i][movie]  for i in range(0, len(my_collection)) for movie in hash_movie[i]]
+
+exit()
 loop: bool = True
 while loop:
     user_choice: int = int(input("\

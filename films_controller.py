@@ -91,10 +91,11 @@ class FilmsController:
         return movie_genre
 
     
-    def sort_by_rating(sefl, username):
+    def sort_by_rating(sefl, username: str):
         films = []
         for data_film in read_json_file(PATH_INFO_USERS)[username]\
                                             ["user rating"]['films']:
+            print(data_film)
             films.append(data_film)
 
-        print(sorted(films, key=itemgetter("rating")))
+        return films
