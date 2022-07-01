@@ -1,5 +1,8 @@
 from operator import itemgetter
 from exceptions import MovieNotfound 
+from read_write_json import read_json_file
+from path_file import PATH_INFO_USERS
+
 import re
 
 
@@ -60,11 +63,10 @@ class FilmsController:
         return sorted(found_movies, key=itemgetter("year"))
     
     def __pagination_of_movies(self, sort_film: list, films_to_genre: list) -> list:
-        return [sort_film[i:i+5] for i in range(0, len(films_to_genre), 5)]
+        return [sort_film[i: i + 5] for i in range(0, len(films_to_genre), 5)]
 
     def search_movies_by_genre_sorted_rating(self, genre: str) -> list:
         """Вывод всех фильмов по конретному жанру отсортированных по рейтингу"""
-
         films_to_genre = []
         
         for film_hash in self.films:
@@ -78,3 +80,22 @@ class FilmsController:
                             })
         return self.__pagination_of_movies(
                         sorted(films_to_genre, key=itemgetter("rating")), films_to_genre)
+
+    def film_genres(self, movie: str):
+        movie_genre = []
+        for film_hash in self.films:
+            for films in film_hash:
+                if movie == films["nameRu"]:
+                    movie_genre.extend([films["genres"][i]["genre"]\
+                        for i in range(0 , len(films["genres"]))])
+        return movie_genre
+
+    
+    def sort_by_rating(sefl, username: str):
+        films = []
+        for data_film in read_json_file(PATH_INFO_USERS)[username]\
+                                            ["user rating"]['films']:
+            print(data_film)
+            films.append(data_film)
+
+        return films

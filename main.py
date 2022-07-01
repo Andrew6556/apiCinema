@@ -1,22 +1,40 @@
 from films_controller import FilmsController
-from path_file import PATH_JSON_FILMS
-from read_write_json import read_json_file
 from concol_film import Interface_Films
 from user_interface import UserInterface
 from user import User
 from iter_page import IterPage
+from operator import itemgetter
 from exceptions import*
+
+
+
+from path_file import PATH_JSON_FILMS, PATH_INFO_USERS
+from read_write_json import read_json_file, write_json_file
+from user import file_content
+from check_json_movies import check_json_movies
 
 import inspect
 
 
-# if not os.stat(f'data/{PATH_JSON_FILMS}').st_size:
-#     for number in range(1, all_pages_films("pagesCount") + 1):
-#         data = read_json_file(PATH_JSON_FILMS)
-#         data.append(all_pages_films("films", number))
-#         write_json_file(PATH_JSON_FILMS, data)
 
+# check_json_movies()
 
+hash_movie = [
+        {"один дома":{'rating':10, "genres":["криминал", "драмма", "боевик"]}}, 
+        {"1+1":{'rating':8, "genres":["криминал", "драмма", "боевик"]}},
+        {"зеленая книга":{'rating':9, "genres":["криминал", "драмма", "боевик"]}}
+    ]
+
+my_collection = [
+        {"один дома":{'rating':10, "genres":["криминал", "драмма", "боевик"]}}, 
+        {"1+1":{'rating':8, "genres":["криминал", "драмма", "боевик"]}},
+        {"зеленая книга":{'rating':9, "genres":["криминал", "драмма", "боевик"]}}
+    ]
+
+print([my_collection[i][movie]  for i in range(0, len(my_collection)) for movie in hash_movie[i]])
+a = [my_collection[i][movie]  for i in range(0, len(my_collection)) for movie in hash_movie[i]]
+
+exit()
 loop: bool = True
 while loop:
     user_choice: int = int(input("\
@@ -77,6 +95,8 @@ while True:
         films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
         consol_films = Interface_Films(films)
+        films.sort_by_rating("@a")
+        exit()
 
         while True:
             movie_title: str = input('Напишите название просмотренного фильма\n')
@@ -133,9 +153,11 @@ while True:
                 break
 
     elif choice_user == 3:
-        films = FilmsController(read_json_file(PATH_JSON_FILMS))
+        user_consol = UserInterface(user)
 
+        films = FilmsController(read_json_file(PATH_JSON_FILMS))
         consol_films = Interface_Films(films)
+        
         while True:
             movie_title: str = input('Напишите название фильма: ')
             try:
@@ -146,16 +168,25 @@ while True:
                 consol_films.output_of_found_films(movie_title)
                 break
 
-        while True:
+        loop_score = True
+        while loop_score:
             try:
                 choice_watched_movie: int = int(input("Выберете фильм(введите цифру): "))
                 film = films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
             except KeyError:
                 print('Введена недопустимая цифра вводе')
             else:
-                user.movie_user_rating(film)
-                print("Вы успешно добавили фильм!")
-                break
+                while loop_score:
+                    try:
+                        film_score = int(input("Оцените данный фильм от 0 до 10: "))
+                        user.movie_user_rating(film, film_score, films.film_genres(film))
+                    except Overestimation:
+                        user_consol.wrong_movie_rating(film, film_score, films.film_genres(film))
+                    except Score_Below_Acceptable:
+                        user_consol.wrong_movie_rating(film, film_score, films.film_genres(film))
+                    else:
+                        print("Вы успешно добавили фильм!")
+                        loop_score = False
 
 
 
