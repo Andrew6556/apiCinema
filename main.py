@@ -14,7 +14,7 @@ from user import file_content
 from check_json_movies import check_json_movies
 
 import inspect
-
+import operator
 
 
 # check_json_movies()
@@ -31,9 +31,13 @@ my_collection = [
         {"зеленая книга":{'rating':9, "genres":["криминал", "драмма", "боевик"]}}
     ]
 
-print([my_collection[i][movie]  for i in range(0, len(my_collection)) for movie in hash_movie[i]])
-a = [my_collection[i][movie]  for i in range(0, len(my_collection)) for movie in hash_movie[i]]
+# print([my_collection[i][movie]  for i in range(0, len(my_collection)) for movie in hash_movie[i]])
+# a = [my_collection[i][movie]  for i in range(0, len(my_collection)) for movie in hash_movie[i]]
+# print(sorted(hash_movie, key=itemgetter("один дома")))
 
+print(sorted(my_collection, key=lambda d: d['name']))
+# for num in range(len(hash_movie)):
+    # list(my_collection[num].keys())[0]
 exit()
 loop: bool = True
 while loop:
