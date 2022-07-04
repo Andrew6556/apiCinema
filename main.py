@@ -36,7 +36,7 @@ my_collection = [
 # [film["genres"][i]["genre"]\
 #                     for i in range(0 , len(film["genres"]))]
 
-
+# ы
 
 
 exit()
