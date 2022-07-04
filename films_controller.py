@@ -91,11 +91,25 @@ class FilmsController:
         return movie_genre
 
     
-    def sort_by_rating(sefl, username: str):
-        films = []
-        for data_film in read_json_file(PATH_INFO_USERS)[username]\
-                                            ["user rating"]['films']:
-            print(data_film)
-            films.append(data_film)
+def sort_film_user_by_rating(list_film: dict) -> dict:
+    dict_rating_user_film = {}
+    for i in list_film:
+        for c in i.values():
+            if c["rating"] in dict_rating_user_film:
+                dict_rating_user_film[c["rating"]].append(i)
+            else:
+                dict_rating_user_film[c["rating"]] = [i]
+    return dict_rating_user_film
 
-        return films
+def rating_film_more_to_less(sort_rating, side: bool) -> dict:
+    return dict(sorted(sort_rating.items(), key=lambda x: x[0], reverse=side))
+
+
+# def listing_specific_movies_by_genre(genre):
+#     list_genre_films = []
+
+#     for hash_films in my_collection:
+#         for value in hash_films.values():
+#             if genre in [value["genres"][i]\
+#                 for i in range(0 , len(value["genres"]))]:
+#                 list_genre_films.append(hash_films)
