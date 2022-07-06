@@ -7,7 +7,6 @@ from operator import itemgetter
 from exceptions import*
 
 
-
 from path_file import PATH_JSON_FILMS, PATH_INFO_USERS
 from read_write_json import read_json_file, write_json_file
 from user import file_content
@@ -18,25 +17,13 @@ import operator
 
 
 
-# check_json_movies()
+check_json_movies()
 
-hash_movie = [
-        {"один дома":{'rating':10, "genres":["криминал", "драмма", "боевик"]}}, 
-        {"1+1":{'rating':8, "genres":["криминал", "драмма", "боевик"]}},
-        {"зеленая книга":{'rating':9, "genres":["криминал", "драмма", "боевик"]}}
-    ]
+films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
-
-my_collection = [
-        {"один дома":{'rating':10, "genres":["криминал", "драмма", "боевик"]}},
-        {"два дома":{'rating':7, "genres":["криминал", "драмма", "боевик"]}},
-        {"три дома дома":{'rating':8, "genres":["криминал", "драмма", "боевик"]}},
-        {"зеленая книга":{'rating':9, "genres":["криминал",  "боевик"]}}
-]
-# [film["genres"][i]["genre"]\
-#                     for i in range(0 , len(film["genres"]))]
-
-# ы
+consol_films = Interface_Films(films)
+# films.rating_film_more_to_less(films.sort_film_user_by_rating(read_json_file(PATH_INFO_USERS)["@a"]["user rating"]["films"]), True)
+# print(films.sort_film_user_by_rating(read_json_file(PATH_INFO_USERS)["@a"]["user rating"]["films"], False))
 
 
 exit()
@@ -100,8 +87,6 @@ while True:
         films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
         consol_films = Interface_Films(films)
-        films.sort_by_rating("@a")
-        exit()
 
         while True:
             movie_title: str = input('Напишите название просмотренного фильма\n')
@@ -158,40 +143,71 @@ while True:
                 break
 
     elif choice_user == 3:
-        user_consol = UserInterface(user)
-
-        films = FilmsController(read_json_file(PATH_JSON_FILMS))
-        consol_films = Interface_Films(films)
-        
         while True:
-            movie_title: str = input('Напишите название фильма: ')
-            try:
-                films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)
-            except MovieNotfound:
-                consol_films.output_of_found_films(movie_title)
-            else:
-                consol_films.output_of_found_films(movie_title)
-                break
+            user_consol = UserInterface(user)
 
-        loop_score = True
-        while loop_score:
-            try:
-                choice_watched_movie: int = int(input("Выберете фильм(введите цифру): "))
-                film = films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
-            except KeyError:
-                print('Введена недопустимая цифра вводе')
-            else:
+            films = FilmsController(read_json_file(PATH_JSON_FILMS))
+            consol_films = Interface_Films(films)
+            print(""" 
+                1. Добавить свою оценку фильму
+                2. Вывести фильмы по рейтингу
+                    Дальнейшие возможности:
+                        1. От лучшего к худшему
+                        2. От худшего к лучшему
+                3. Вывод фильмов определённого жанра
+                4. Выход из данного меню
+            """)
+            action_choice = int(input("Ваш выбор(напишите цифру): "))
+            if action_choice == 1:
+                while True:
+                    movie_title: str = input('Напишите название фильма: ')
+                    try:
+                        films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)
+                    except MovieNotfound:
+                        consol_films.output_of_found_films(movie_title)
+                    else:
+                        consol_films.output_of_found_films(movie_title)
+                        break
+
+                loop_score = True
                 while loop_score:
                     try:
-                        film_score = int(input("Оцените данный фильм от 0 до 10: "))
-                        user.movie_user_rating(film, film_score, films.film_genres(film))
-                    except Overestimation:
-                        user_consol.wrong_movie_rating(film, film_score, films.film_genres(film))
-                    except Score_Below_Acceptable:
-                        user_consol.wrong_movie_rating(film, film_score, films.film_genres(film))
+                        choice_watched_movie: int = int(input("Выберете фильм(введите цифру): "))
+                        film = films.a_set_of_occurrences_based_on_a_misspelled_film(movie_title)[choice_watched_movie]
+                    except KeyError:
+                        print('Введена недопустимая цифра вводе')
                     else:
-                        print("Вы успешно добавили фильм!")
-                        loop_score = False
+                        while loop_score:
+                            try:
+                                film_score = int(input("Оцените данный фильм от 0 до 10: "))
+                                user.movie_user_rating(film, film_score, films.film_genres(film))
+                            except Overestimation:
+                                user_consol.wrong_movie_rating(film, film_score, films.film_genres(film))
+                            except ScoreBelowAcceptable:
+                                user_consol.wrong_movie_rating(film, film_score, films.film_genres(film))
+                            else:
+                                print("Вы успешно добавили фильм!")
+                                loop_score = False
+            elif action_choice == 2:
+                print(""" 
+                    По какому каритерию хотите вывести фильмы:
+                        1. От лучшего к худшему
+                        2. От худшего к лучшему
+                """)
+                    
+                movie_output_selection = int(input("Напишите цифру того ,что выбрали\n"))
+
+                if movie_output_selection == 1:
+                    pass
+
+                elif movie_output_selection == 2:
+                    pass
+
+            elif action_choice == 3:
+                pass
+
+            elif action_choice == 4:
+                break
 
 
 

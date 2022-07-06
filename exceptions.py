@@ -21,5 +21,8 @@ class MovieNotfound(Exception):
 class Overestimation(Exception):
     pass
 
-class Score_Below_Acceptable(Exception):
+class ScoreBelowAcceptable(Exception):
+    pass
+
+class WrongGenre(Exception):
     pass

@@ -1,5 +1,5 @@
 from operator import itemgetter
-from exceptions import MovieNotfound 
+from exceptions import MovieNotfound, WrongGenre
 from read_write_json import read_json_file
 from path_file import PATH_INFO_USERS
 
@@ -91,25 +91,33 @@ class FilmsController:
         return movie_genre
 
     
-def sort_film_user_by_rating(list_film: dict) -> dict:
-    dict_rating_user_film = {}
-    for i in list_film:
-        for c in i.values():
-            if c["rating"] in dict_rating_user_film:
-                dict_rating_user_film[c["rating"]].append(i)
-            else:
-                dict_rating_user_film[c["rating"]] = [i]
-    return dict_rating_user_film
+    def sort_film_user_by_rating(self, list_film: dict) -> dict:
+        dict_rating_user_film = {}
+        for hash_films in list_film:
+            for data_film in hash_films.values():
+                if data_film["rating"] in dict_rating_user_film:
+                    dict_rating_user_film[data_film["rating"]].append(hash_films)
+                else:
+                    dict_rating_user_film[data_film["rating"]] = [hash_films]
+        return  dict_rating_user_film
 
-def rating_film_more_to_less(sort_rating, side: bool) -> dict:
-    return dict(sorted(sort_rating.items(), key=lambda x: x[0], reverse=side))
+    def rating_film_more_to_less(self, sort_rating, side: bool) -> dict:
+        return dict(sorted(sort_rating.items, key=lambda x: x[0], reverse=side))
 
+    def checking_for_a_movie(func):
+        def wrapper(self, movie, *args, **kwargs):
+            result = func(self, movie, *args, **kwargs)
+            if len(result) == 0:
+                raise WrongGenre
+            return result
+        return wrapper
 
-# def listing_specific_movies_by_genre(genre):
-#     list_genre_films = []
-
-#     for hash_films in my_collection:
-#         for value in hash_films.values():
-#             if genre in [value["genres"][i]\
-#                 for i in range(0 , len(value["genres"]))]:
-#                 list_genre_films.append(hash_films)
+    @checking_for_a_movie
+    def listing_specific_movies_by_genre(self, genre: str, list_films: list) -> list:
+        list_genre_films = []
+        for hash_films in list_films:
+            for value in hash_films.values():
+                if genre.lower() in [value["genres"][i]\
+                    for i in range(0 , len(value["genres"]))]:
+                    list_genre_films.append(hash_films)
+        return list_genre_films

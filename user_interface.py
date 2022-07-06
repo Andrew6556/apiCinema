@@ -26,6 +26,6 @@ class UserInterface:
             self.user.movie_user_rating(film, film_score, genres)
         except Overestimation:
             print('Вы ввели число, больше допустимого!')
-        except Score_Below_Acceptable:
+        except ScoreBelowAcceptable:
             print('Вы ввели число, меньше допустимого!')
 

@@ -105,7 +105,7 @@ class User:
             if ball > 10:
                 raise Overestimation
             elif ball < 0:
-                raise Score_Below_Acceptable
+                raise ScoreBelowAcceptable
             return func(sefl, film, ball, genre_movie)
         return wrapper
 

@@ -37,9 +37,10 @@ class Interface_Films:
             for index, movies_watched in enumerate(data_info, start=1):
                 print(f"{index}. {movies_watched}")
 
-    def output_of_evaluation_films_by_rating(self, name: str):
-        for data_film in read_json_file(PATH_INFO_USERS)[name]["user rating"]['films']:
-            print(f"{data_film} ------- ")
+    def output_of_evaluation_films_by_rating(self, list_films):
+        pass
+        # for data_film in :
+        #     print(f"{data_film} ------- ")
 
             # for index, movies_watched in enumerate(data_info, start=1):
             #     print(f"{index}. {movies_watched}")
