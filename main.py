@@ -19,11 +19,8 @@ import operator
 
 check_json_movies()
 
-films = FilmsController(read_json_file(PATH_JSON_FILMS))
 
-consol_films = Interface_Films(films)
-# films.rating_film_more_to_less(films.sort_film_user_by_rating(read_json_file(PATH_INFO_USERS)["@a"]["user rating"]["films"]), True)
-# print(films.sort_film_user_by_rating(read_json_file(PATH_INFO_USERS)["@a"]["user rating"]["films"], False))
+
 
 
 exit()

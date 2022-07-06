@@ -91,18 +91,18 @@ class FilmsController:
         return movie_genre
 
     
-    def sort_film_user_by_rating(self, list_film: dict) -> dict:
+    def sort_film_user_by_rating(self, side) -> dict:
         dict_rating_user_film = {}
-        for hash_films in list_film:
+        for hash_films in read_json_file(PATH_INFO_USERS)["@a"]["user rating"]["films"]:
             for data_film in hash_films.values():
                 if data_film["rating"] in dict_rating_user_film:
                     dict_rating_user_film[data_film["rating"]].append(hash_films)
                 else:
                     dict_rating_user_film[data_film["rating"]] = [hash_films]
-        return  dict_rating_user_film
+        return  self.rating_film_more_to_less(dict_rating_user_film, side)
 
     def rating_film_more_to_less(self, sort_rating, side: bool) -> dict:
-        return dict(sorted(sort_rating.items, key=lambda x: x[0], reverse=side))
+        return dict(sorted(sort_rating.items(), key=lambda x: x[0], reverse=side))
 
     def checking_for_a_movie(func):
         def wrapper(self, movie, *args, **kwargs):
