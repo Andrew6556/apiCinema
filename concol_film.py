@@ -1,4 +1,4 @@
-from exceptions import MovieNotfound
+from exceptions import MovieNotfound,WrongGenre
 from read_write_json import read_json_file
 from path_file import PATH_INFO_USERS
 
@@ -37,14 +37,25 @@ class Interface_Films:
             for index, movies_watched in enumerate(data_info, start=1):
                 print(f"{index}. {movies_watched}")
 
-    def output_of_evaluation_films_by_rating(self, list_films):
-        pass
-        # for data_film in :
-        #     print(f"{data_film} ------- ")
+    def output_of_evaluation_films_by_rating(self, side: bool):
+        result = self.films.sort_film_user_by_rating(side)
+        
+        for num, data_name in result.items():
+            for hash in data_name:
+                for name in hash:
+                    print(f"{name} -- рейтинг фильма: {hash[name]['rating']} ")
 
-            # for index, movies_watched in enumerate(data_info, start=1):
-            #     print(f"{index}. {movies_watched}")
-                
+    def output_of_films_depending_on_the_genre(self, username, genre: str):
+        try:
+            result = self.films.listing_specific_movies_by_genre(username, genre)
+        except WrongGenre:
+            print("error!Фильмов с этим жанром не найденно")
+        else:
+            for data_name in result:
+                for i in data_name:
+                    print(f"{i}")
+
+
 
 
 

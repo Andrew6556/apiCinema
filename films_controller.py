@@ -113,9 +113,9 @@ class FilmsController:
         return wrapper
 
     @checking_for_a_movie
-    def listing_specific_movies_by_genre(self, genre: str, list_films: list) -> list:
+    def listing_specific_movies_by_genre(self, username: str, genre: str) -> list:
         list_genre_films = []
-        for hash_films in list_films:
+        for hash_films in read_json_file(PATH_INFO_USERS)[username]["user rating"]["films"]:
             for value in hash_films.values():
                 if genre.lower() in [value["genres"][i]\
                     for i in range(0 , len(value["genres"]))]:
