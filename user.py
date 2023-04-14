@@ -13,8 +13,6 @@ def file_content(path_json: str):
     return data
 
 
-
-
 class User:
 
     @staticmethod
